@@ -7,9 +7,37 @@
 
 #define SIGN(X) (((X) > 0) - ((X) < 0))
 
-int my_strcmp(const char *s1, const char *s2);
-void *my_memcpy(void *dest, const void *src, size_t n);
-char *my_strcpy(char *dest, const char *src);
+int my_strcmp(const char *s1, const char *s2) {
+	int i = 0;
+	
+	while (*(s1 + i) != 0 && *(s2 + i) != 0 && *(s1 + i) == *(s2 + i)) {
+		i++;
+	}
+	
+	return *(s1 + i) - *(s2 + i);
+}
+
+void *my_memcpy(void *dest, const void *src, size_t n) {
+	size_t i;
+	
+	for (i = 0; i < n; i++) {
+		*(((char *) dest) + i) = *(((char *) src) + i);
+	}
+	
+	return dest;
+}
+
+char *my_strcpy(char *dest, const char *src) {
+	int i = 0;
+	
+	while (*(src + i) != 0) {
+		*(dest + i) = *(src + i);
+		i++;
+	}
+	
+	*(dest + i) = 0;
+	return dest;
+}
 
 int main(void)
 {
@@ -33,9 +61,9 @@ int main(void)
 	 * Daca functia voastra este implementata corect atunci asertia se va realiza
 	 * cu succes. In caz contrar, programul va crapa.
 	 */
-	// assert(SIGN(my_strcmp(s1, s2)) == SIGN(strcmp(s1, s2)));
+	assert(SIGN(my_strcmp(s1, s2)) == SIGN(strcmp(s1, s2)));
 	// assert(my_strcpy(dest_str, src) && !strcmp(dest_str, src));
-	// assert(my_memcpy(dest_mem, src, sizeof(src)) && !memcmp(dest_mem, src, sizeof(src)));
+	assert(my_memcpy(dest_mem, src, sizeof(src)) && !memcmp(dest_mem, src, sizeof(src)));
 
 	free(dest_str);
 	free(dest_mem);
