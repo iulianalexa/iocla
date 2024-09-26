@@ -4,7 +4,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *delete_first(char *s, char *pattern);
+char *delete_first(char *s, char *pattern) {
+	char aux[100], *p;
+	strcpy(aux, s);
+	p = strstr(s, pattern);
+	strcpy(aux + (p - s), p + strlen(pattern));
+	strcpy(s, aux);
+	return s;
+}
 
 int main(void)
 {
@@ -12,14 +19,14 @@ int main(void)
 	 * TODO: Este corectă declarația variabilei s în contextul în care o să apelăm
 	 * funcția delete_first asupra sa? De ce? Modificați dacă este cazul.
 	 */
-	char *s = "Ana are mere";
-	char *pattern = "re";
+	char s[] = "Ana are mere";
+	char pattern[] = "re";
 
 	(void) s;
 	(void) pattern;
 
 	// Decomentați linia după ce ați implementat funcția delete_first.
-	// printf("%s\n", delete_first(s, pattern));
+	printf("%s\n", delete_first(s, pattern));
 
 	return 0;
 }
